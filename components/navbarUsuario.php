@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg" id="menu">
                 <div class="container-fluid">
-                    <a href="../petslife/index.php"><h1 class="logo nav"></h1></a>
+                    <a href="../index.php"><h1 class="logo nav"></h1></a>
                     <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">

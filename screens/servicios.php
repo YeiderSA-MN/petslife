@@ -74,7 +74,7 @@
 
             <h1>Contactenos</h1>
                 
-            <form id='miforma' action='../petslife/index.php' method='GET' >
+            <form id='miforma' action='../index.php' method='GET' >
 
             <label class="label" for='asunto'>Asunto:</label>
             <select id="asunto" name="asunto">

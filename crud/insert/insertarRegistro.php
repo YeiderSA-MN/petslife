@@ -43,7 +43,7 @@ $update->bindParam(':local_', $vlocal);
 
 $update->execute();
 
-header("location: ../../screens/index.php");
+header("location: ../../index.php");
 
 } catch (PDOException $e) {
     //Error;

@@ -4,7 +4,7 @@
                 <img src="../img/logo2.png" alt="">
                 <span class="nav-item">Tienda</span>
             </a></li>
-            <li><a href="../screens/index.php">
+            <li><a href="../index.php">
                 <i class="fas fa-home"></i>
                 <span class="nav-item">Inicio</span>
             </a></li>

@@ -128,7 +128,7 @@
 					exit;
 				}
 				else {
-					header("location: ../screens/index.php");
+					header("location: ../index.php");
 				}
 			}
 			else{

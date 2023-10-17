@@ -51,7 +51,7 @@ function getPosts(){
       if ($insert_Result) {
           echo "<script type='text/javascript'>
                           alert('Nueva cita agregada exitosamente');
-                            window.location='../../screens/index.php';
+                            window.location='../../index.php';
                               </script>";
         } else {
           echo "<script type='text/javascript'>
