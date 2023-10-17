@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html  lang="es">
     <head>
@@ -28,7 +27,7 @@
                         unset($_GET["nombre"]);
                         unset($_GET["mensaje"]);
                         unset($_GET["correo"]);
-                        header("location: contactenos.php");
+                        header("location: screens/contactenos.php");
                             
                     }
                     else{

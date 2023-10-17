@@ -9,7 +9,7 @@
 
     <script language="javascript">
         alert("Email enviado con éxito");
-        window.location.href="index.php";
+        window.location.href="../index.php";
     </script>
 </body>
 

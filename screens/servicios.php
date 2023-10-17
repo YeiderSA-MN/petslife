@@ -24,7 +24,30 @@
     </head>
 
     <body>
+    <?php
+                if (!empty($_GET["mensaje"]) && !empty($_GET["nombre"]) )
 
+                {
+
+                    $recibe =$_GET["correo"];
+                    $asunto = "Contacto con Petslife"; 
+                    $cuerpo = "Se recibe correo con el siguiente contenido:  ".$_GET["asunto"].",".$_GET["mensaje"].",".$_GET["nombre"].",".$_GET["tel"].",".$_GET["correo"];
+                    $envia = "From:".$_GET["correo"]."";
+                    if(mail($recibe, $asunto, $cuerpo, $envia) && mail("petslifeproyect@gmail.com",$asunto,$cuerpo,$envia)){
+                        
+                        unset($_GET["mensaje"]);
+                        unset($_GET["nombre"]);
+                        unset($_GET["mensaje"]);
+                        unset($_GET["correo"]);
+                        header("location: contactenos.php");
+                            
+                    }
+                    else{
+                        echo "Lo lamento el correo no se envió con exito revise de nuevo los datos";
+                    }
+
+                }
+                ?>
     <?php
         session_start();
         include_once "../functions/conexion_petslife.php";
