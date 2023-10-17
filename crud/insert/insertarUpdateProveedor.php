@@ -1,36 +1,36 @@
 <?php
 try {
 
-  $conexion = new PDO('mysql:host=localhost;dbname=petslife;', 'root', ''); 
- 
+  $conexion = new PDO('mysql:host=localhost;dbname=petslife;', 'root', '');
+
 } catch (PDOException $e) {
 
-   echo "Fallo la conexión ".$e->getMessage();
+  echo "Fallo la conexión " . $e->getMessage();
 }
 
 try {
-$vcodigo = filter_var($_POST['codigo']);
-$vnombre = filter_var($_POST['nombre']);
-$vubi= filter_var($_POST['ubicacion']);
-$vciudad = filter_var($_POST['ciudad']);
+  $vcodigo = filter_var($_POST['codigo']);
+  $vnombre = filter_var($_POST['nombre']);
+  $vubi = filter_var($_POST['ubicacion']);
+  $vciudad = filter_var($_POST['ciudad']);
 
 
 
 
 
-$insertar = $conexion->prepare("insert into proveedor (id_proveedor,nombre, ubicacion, ciudad)
+  $insertar = $conexion->prepare("insert into proveedor (id_proveedor,nombre, ubicacion, ciudad)
 values(:code,:nombre,:ubi,:ciudad)");
 
 
-$insertar->bindParam(':code', $vcodigo);
-$insertar->bindParam(':nombre', $vnombre);
-$insertar->bindParam(':ubi', $vubi);
-$insertar->bindParam(':ciudad', $vciudad);
+  $insertar->bindParam(':code', $vcodigo);
+  $insertar->bindParam(':nombre', $vnombre);
+  $insertar->bindParam(':ubi', $vubi);
+  $insertar->bindParam(':ciudad', $vciudad);
 
 
-$insertar->execute();
+  $insertar->execute();
 
-header("location: ../read/readProveedor.php");
+  header("location: ../read/readProveedor.php");
 
 } catch (PDOException $e) {
   // Error;

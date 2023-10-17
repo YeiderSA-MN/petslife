@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <link rel="stylesheet" href="../../styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <style>
     /* Agrega estilos CSS para lograr el efecto deseado */
     body {
@@ -12,19 +13,23 @@
     }
 
     nav {
-      width: 18%; /* Cambia esto al ancho deseado para el nav */
-      background-color: #fff; /* Cambia esto al color deseado */
+      width: 18%;
+      /* Cambia esto al ancho deseado para el nav */
+      background-color: #fff;
+      /* Cambia esto al color deseado */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .container {
-      width: 82%; /* El ancho restante para el contenido */
+      width: 82%;
+      /* El ancho restante para el contenido */
       padding-top: 2%;
       padding-left: 15%;
     }
 
     .main {
-      background-color: #f7f7f7; /* Cambia esto al color deseado para el fondo del contenido */
+      background-color: #f7f7f7;
+      /* Cambia esto al color deseado para el fondo del contenido */
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
@@ -41,13 +46,14 @@
       background: #F27529;
       background: linear-gradient(to top, #F27529, #BFC2A3);
     }
+
     .testbutton:hover {
       color: #000000 !important;
       background: #BFC2A3;
       background: linear-gradient(to top, #BFC2A3, #F27529);
     }
 
-    td{
+    td {
       text-align: left;
       padding-left: 80%;
     }
@@ -55,15 +61,15 @@
     .main-skills td {
       width: auto;
     }
-
   </style>
 </head>
+
 <body>
 
-<?php
+  <?php
   session_start();
   include_once "../../components/sidebarCruds.php";
-?>
+  ?>
 
 
   <div class="container">
@@ -71,119 +77,122 @@
     <section class="main">
       <div class="main-top">
         <h1>Insertar producto</h1>
-        </div>
-        <div class="main-skills">
+      </div>
+      <div class="main-skills">
         <form action="insertarUpdateProducto.php" method="POST">
           <?php
-            try {
-              $conexion = new PDO('mysql:host=localhost;port=3306;dbname=petslife;', 'root', '');
-             
-            } catch (PDOException $e) {
-               echo "Fallo la conexión ".$e->getMessage();
-            }
-            
+          try {
+            $conexion = new PDO('mysql:host=localhost;port=3306;dbname=petslife;', 'root', '');
+
+          } catch (PDOException $e) {
+            echo "Fallo la conexión " . $e->getMessage();
+          }
+
           ?>
 
-            <table style="text-align: left">
-              <tr>
-                <th>Codigo producto:</th>
-                <td>
-                    <?php echo "<input type='text' id='codigo' name='codigo' value=''>"; ?>
-                </td>
-              </tr>
-              <tr>
-                  <th>Nombre producto:</th>
-                  <td>
-                      <?php echo "<input type='text' id='nombre' name='nombre' value=''>"; ?>
-                  </td>
-              </tr>
-              <tr>
-                <th>Descripcion producto:</th>
-                <td>
-                    <?php echo "<input type='text' id='descripcion' name='descripcion' value=''>"; ?>
-                </td>
-              </tr>
-              <tr>
-                  <th>Precio producto:</th>
-                  <td>
-                      <?php echo "<input type='text' id='precio' name='precio' value=''>"; ?>
-                  </td>
-              </tr>
-              <tr>
-                <th>Producto:</th>
-                  <td>
-                    <?php 
-                      try {
-                        $consulta = $conexion->query("select cod_producto, descripcion from tipo_producto");
-                        $consulta->setFetchMode(PDO::FETCH_ASSOC);
-                        echo "<label for='producto'></label>";
-                        echo "<select id=producto name=producto>";
-                        
-                        while ($row = $consulta->fetch()) {
-                          if ($vproducto == $row['cod_producto']){
-                            echo "<option value=".$row['cod_producto']." selected>".$row['descripcion']."</option>";
-                          }
-                          else{
-                            echo "<option value=".$row['cod_producto'].">".$row['descripcion']."</option>";
-                          }
-                        }
+          <table style="text-align: left">
+            <tr>
+              <th>Codigo producto:</th>
+              <td>
+                <?php echo "<input type='text' id='codigo' name='codigo' value=''>"; ?>
+              </td>
+            </tr>
+            <tr>
+              <th>Nombre producto:</th>
+              <td>
+                <?php echo "<input type='text' id='nombre' name='nombre' value=''>"; ?>
+              </td>
+            </tr>
+            <tr>
+              <th>Descripcion producto:</th>
+              <td>
+                <?php echo "<input type='text' id='descripcion' name='descripcion' value=''>"; ?>
+              </td>
+            </tr>
+            <tr>
+              <th>Precio producto:</th>
+              <td>
+                <?php echo "<input type='text' id='precio' name='precio' value=''>"; ?>
+              </td>
+            </tr>
+            <tr>
+              <th>Producto:</th>
+              <td>
+                <?php
+                try {
+                  $consulta = $conexion->query("select cod_producto, descripcion from tipo_producto");
+                  $consulta->setFetchMode(PDO::FETCH_ASSOC);
+                  echo "<label for='producto'></label>";
+                  echo "<select id=producto name=producto>";
 
-                        echo "</select>";
+                  while ($row = $consulta->fetch()) {
+                    if ($vproducto == $row['cod_producto']) {
+                      echo "<option value=" . $row['cod_producto'] . " selected>" . $row['descripcion'] . "</option>";
+                    } else {
+                      echo "<option value=" . $row['cod_producto'] . ">" . $row['descripcion'] . "</option>";
+                    }
+                  }
 
-                      } catch (PDOException $e) {
-                        echo 'Error' . $e->getMessage();
-                      }
-                    ?>
-                    
-                  </td>
-              </tr>
-              <tr>
-                <th>Marca producto:</th>
-                  <td>
-                    <?php 
-                      try {
-                        $consulta = $conexion->query("select id_marca, nombre from marca");
-                        $consulta->setFetchMode(PDO::FETCH_ASSOC);
-                        echo "<label for='marca'></label>";
-                        echo "<select id=marca name=marca>";
-                        
-                        while ($row = $consulta->fetch()) {
-                          if ($vlocal == $row['id_marca']){
-                            echo "<option value=".$row['id_marca']." selected>".$row['nombre']."</option>";
-                          }
-                          else{
-                            echo "<option value=".$row['id_marca'].">".$row['nombre']."</option>";
-                          }
-                        }
+                  echo "</select>";
 
-                        echo "</select>";
+                } catch (PDOException $e) {
+                  echo 'Error' . $e->getMessage();
+                }
+                ?>
 
-                      } catch (PDOException $e) {
-                        echo 'Error' . $e->getMessage();
-                      }
-                    ?>
-                  </td>
-              </tr>
-              <tr>
-                <th>Imagen (URL):</th>
-                <td>
-                    <?php echo "<input type='text' id='imagen' name='imagen'>"; ?>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding-top: 5%;border:0px;">
-                  <input class="testbutton" type="submit" value="Insertar Prodcuto">
-                </td>
-              </tr>
-            </table>
+              </td>
+            </tr>
+            <tr>
+              <th>Marca producto:</th>
+              <td>
+                <?php
+                try {
+                  $consulta = $conexion->query("select id_marca, nombre from marca");
+                  $consulta->setFetchMode(PDO::FETCH_ASSOC);
+                  echo "<label for='marca'></label>";
+                  echo "<select id=marca name=marca>";
+
+                  while ($row = $consulta->fetch()) {
+                    if ($vlocal == $row['id_marca']) {
+                      echo "<option value=" . $row['id_marca'] . " selected>" . $row['nombre'] . "</option>";
+                    } else {
+                      echo "<option value=" . $row['id_marca'] . ">" . $row['nombre'] . "</option>";
+                    }
+                  }
+
+                  echo "</select>";
+
+                } catch (PDOException $e) {
+                  echo 'Error' . $e->getMessage();
+                }
+                ?>
+              </td>
+            </tr>
+            <tr>
+              <th>Imagen (URL):</th>
+              <td>
+                <?php echo "<input type='text' id='imagen' name='imagen'>"; ?>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding-top: 5%;border:0px;">
+                <input class="testbutton" type="submit" value="Insertar Prodcuto">
+              </td>
+            </tr>
+          </table>
         </form>
     </section>
-  
+
 
 
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+    integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+    crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/e6fae3c345.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -4,16 +4,16 @@ include_once "../../functions/conexion_petslife.php";
 
 try {
 
-$vcodigo=filter_var($_GET['code']);
+    $vcodigo = filter_var($_GET['code']);
 
 
-$delete = $conexion->prepare("DELETE FROM producto WHERE id_producto= :codigo");
+    $delete = $conexion->prepare("DELETE FROM producto WHERE id_producto= :codigo");
 
-$delete->bindParam(':codigo', $vcodigo);
+    $delete->bindParam(':codigo', $vcodigo);
 
-$delete->execute();
+    $delete->execute();
 
-header("location: ../read/readProducto.php");
+    header("location: ../read/readProducto.php");
 
 } catch (PDOException $e) {
     //Error;

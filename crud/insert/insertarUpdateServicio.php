@@ -2,26 +2,26 @@
 try {
 
   $conexion = new PDO('mysql:host=localhost;dbname=petslife;', 'root', '');
- 
+
 } catch (PDOException $e) {
 
-   echo "Fallo la conexión ".$e->getMessage();
+  echo "Fallo la conexión " . $e->getMessage();
 }
 
 try {
 
-$vservicio = filter_var($_POST['codigo']);
-$vdescripcion = filter_var($_POST['descripcion']);
+  $vservicio = filter_var($_POST['codigo']);
+  $vdescripcion = filter_var($_POST['descripcion']);
 
-$insertar = $conexion->prepare("insert into servicio (id_servicio,descripcion) values(:servicio,:descrip)");
+  $insertar = $conexion->prepare("insert into servicio (id_servicio,descripcion) values(:servicio,:descrip)");
 
-$insertar->bindParam(':servicio', $vservicio);
-$insertar->bindParam(':descrip', $vdescripcion);
+  $insertar->bindParam(':servicio', $vservicio);
+  $insertar->bindParam(':descrip', $vdescripcion);
 
 
-$insertar->execute();
+  $insertar->execute();
 
-header("location: ../read/readServicio.php");
+  header("location: ../read/readServicio.php");
 
 } catch (PDOException $e) {
 
