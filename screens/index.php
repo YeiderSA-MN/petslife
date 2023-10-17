@@ -50,7 +50,7 @@
         <section class="animals container">
             <div class="row">
             <article class="col-sm-12 col-xl-6 col-lg-6">
-                <img src="../petslife/img/hanna.jpeg" alt="">
+                <img src="../img/hanna.jpeg" alt="">
             </article>
             
             <article class="col-sm-12 col-xl-6 col-lg-6">

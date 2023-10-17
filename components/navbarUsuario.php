@@ -19,10 +19,15 @@
                             <?php
                             }
                         ?>
-
-                            <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="page" href="../screens/perfil.php">Perfil</a>
-                            </li>
+                        <?php
+                           if (isset($_SESSION['loggedin'])){
+                            ?>
+                                <li class="nav-item">
+                                <a class="nav-link fw-bold" aria-current="page" href="../screens/perfil.php">Perfil</a>
+                                </li>
+                            <?php
+                            }
+                        ?>
 
                             <li class="nav-item">
                             <a class="nav-link fw-bold" aria-current="page" href="../screens/tienda.php">Tienda</a>
