@@ -89,28 +89,46 @@
 
 
         if (empty($_GET['passLogin']) && empty($_GET['userLogin'])){
- 
-        }
-        else{
 			
+		}
+        else{
+
 			$mysql_host = 'localhost';
 			$mysql_user = 'root';
 			$password = '';
-			
-			$dbhandle = mysqli_connect($mysql_host, $mysql_user, $password) or die('Problemas de conexion con BD');
-			
-			$selected = mysqli_select_db($dbhandle, 'petslife') or die('No se encontró el esquema');
-			
-			$query = "SELECT cedula, password, tipo_persona, nombre, apellido, numero, cod_local FROM persona WHERE cedula = ? AND password = ?";
+			$database_name = 'petslife';
 
-			$stmt = mysqli_prepare($dbhandle, $query);
-			mysqli_stmt_bind_param($stmt, 'ss', $vusuario, $vclave);
-			mysqli_stmt_execute($stmt);
-			
-			$result = mysqli_stmt_get_result($stmt);
-			
-			$vregistros = mysqli_num_rows($result);
-			$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+			try {
+				$pdo = new PDO("mysql:host=$mysql_host;dbname=$database_name", $mysql_user, $password);
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			} catch (PDOException $e) {
+				die('Problemas de conexión con BD: ' . $e->getMessage());
+			}
+
+			$query = "SELECT cedula, password, tipo_persona, nombre, apellido, numero, cod_local
+			FROM persona WHERE cedula = :usuario AND password = :clave";
+			$stmt = $pdo->prepare($query);
+
+			$stmt->bindParam(':usuario', $vusuario, PDO::PARAM_STR);
+			$stmt->bindParam(':clave', $vclave, PDO::PARAM_STR);
+
+			try {
+				$stmt->execute();
+				$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				$vregistros = count($result);
+
+				if ($vregistros > 0) {
+					$row = $result[0];
+					// Ahora puedes usar $row para acceder a los datos obtenidos.
+				} else {
+					// No se encontraron registros con los datos proporcionados.
+				}
+			} catch (PDOException $e) {
+				die('Error en la consulta: ' . $e->getMessage());
+			}
+		
+
+
 
 			if ($vregistros>0){
 				session_start();
@@ -123,7 +141,7 @@
 				if(isset($_SESSION['products'])){
 					header("location: ../screens/carrito2_petslife.php");
 				}
-				else if($row['tipo_persona']=='1'){
+				elseif($row['tipo_persona']=='1'){
 					header("location: ../screens/dashboard.php");
 					exit;
 				}

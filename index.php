@@ -43,7 +43,7 @@
             ?>
       
         <header>
-            <?php include_once "components/navbarUsuario.php" ?>
+            <?php include_once "components/navbarIndex.php" ?>
         </header>
         
        

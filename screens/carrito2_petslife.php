@@ -7,9 +7,7 @@ session_start();
 $total=0;
 $subtotal=0;
 
-//Database connection, replace with your connection string.. Used PDO
-$conn = new PDO("mysql:host=localhost;dbname=petslife", 'root', '');		
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+include_once "../functions/conexion_petslife.php";
 
 $products = $_SESSION['products'];
 
@@ -63,14 +61,6 @@ $products = $_SESSION['products'];
     <?php
 
 
-
-      try {
-      $conexion = new PDO('mysql:host=localhost;port=3306;dbname=petslife;', 'root', ''); 
-             
-      } catch (PDOException $e) {
-        echo "Fallo la conexión ".$e->getMessage();
-      }
-
       try {
         $bpais = $conexion->query("select nombre a, apellido b, numero c, cedula d from persona WHERE cedula='".$_SESSION['cedula']."'");
         $bpais->setFetchMode(PDO::FETCH_ASSOC);
@@ -123,12 +113,12 @@ $products = $_SESSION['products'];
     }
 ?>
 <br><br>
-    <input type="button" onclick="location.href='index.php'" value="Volver al inicio">
+    <input type="button" onclick="location.href='../index.php'" value="Volver al inicio">
 
     <input type="button" onclick="location.href='tienda.php'" value="Volver al carrito">
 <?php
     if(isset($_SESSION['loggedin'])){?>
-      <input type="button" onclick="location.href='#'" value="Confirmar compra">
+      <input type="button" onclick="location.href='../index.php'" value="Confirmar compra">
       <?php
     } else{?>
       <input type="button" onclick="location.href='loginRegistro.php'" value="Iniciar sesion">

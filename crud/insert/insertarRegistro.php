@@ -7,14 +7,7 @@ $_SESSION['tipo_persona']=$row['tipo_persona'];
 $_SESSION['nombre']=$row['nombre'];
 $_SESSION['loggedin'] = true;
 
-try {
-
-  $conexion = new PDO('mysql:host=localhost;dbname=petslife;', 'root', ''); 
- 
-} catch (PDOException $e) {
-
-   echo "Fallo la conexión ".$e->getMessage();
-}
+include_once "../../functions/conexion_petslife.php";
 
 try {
 $vnombre = filter_var($_POST['nombre']);

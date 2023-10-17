@@ -6,14 +6,12 @@ session_start();
 $total = 0;
 $subtotal = 0;
 
-$conn = new PDO("mysql:host=localhost;dbname=petslife", 'root', '');		
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+include_once "../functions/conexion_petslife.php";
 $action = isset($_GET['action']) ? $_GET['action'] : "";
 
 if ($action == 'addcart' && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = "SELECT * FROM producto WHERE id_producto=:codigo";
-    $stmt = $conn->prepare($query);
+    $stmt = $conexion->prepare($query);
     $stmt->bindParam('codigo', $_POST['codigo']);
     $stmt->execute();
     $product = $stmt->fetch();
@@ -62,7 +60,7 @@ if ($action == 'remove' && isset($_GET['codigo']) && isset($_GET['cantidad'])) {
 }
 
 $query = "SELECT * FROM producto";
-$stmt = $conn->prepare($query);
+$stmt = $conexion->prepare($query);
 $stmt->execute();
 $products = $stmt->fetchAll();
 
